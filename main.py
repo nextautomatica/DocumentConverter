@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
-from PyPDF2 import PdfFileReader
+from PyPDF2 import PdfReader
 import textract
 import csv
 import io
@@ -27,12 +27,12 @@ async def upload_file(file: UploadFile = File(...)):
 
 
 def extract_text_from_pdf(file):
-    pdf = PdfFileReader(file)
+    pdf = PdfReader(file)
     text = ""
 
-    for page_num in range(pdf.getNumPages()):
-        page = pdf.getPage(page_num)
-        text += page.extractText()
+    for page_num in range(len(pdf.pages)):
+        page = pdf.pages[page_num]
+        text += page.extract_text()
 
     return text
 
