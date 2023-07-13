@@ -23,7 +23,7 @@ async def upload_file(file: UploadFile = UploadFile(...)):
     else:
         return {"error": "Invalid file format. Please upload a PDF, CSV, or DOC file."}
 
-    return {"text": text}
+    return {"text": text.decode("utf-8")}
 
 def extract_text_from_pdf(file):
     pdf = PdfFileReader(file)
