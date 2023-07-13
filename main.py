@@ -13,6 +13,7 @@ class Msg(BaseModel):
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
     file_extension = file.filename.split(".")[-1]
+    print(file.filename)
 
     if file_extension == 'pdf':
         text = extract_text_from_pdf(file.file)
