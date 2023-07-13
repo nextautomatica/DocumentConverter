@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI
 from pydantic import BaseModel
 from PyPDF2 import PdfFileReader
 import textract
