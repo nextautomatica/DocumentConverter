@@ -11,7 +11,7 @@ class Msg(BaseModel):
     msg: str
 
 @app.post("/upload")
-async def upload_file(file: UploadFile = UploadFile(...)):
+async def upload_file(file: UploadFile = File(...)):
     file_extension = file.filename.split(".")[-1]
 
     if file_extension == 'pdf':
@@ -23,7 +23,8 @@ async def upload_file(file: UploadFile = UploadFile(...)):
     else:
         return {"error": "Invalid file format. Please upload a PDF, CSV, or DOC file."}
 
-    return {"text": text.decode("utf-8")}
+    return {"text": text}
+
 
 def extract_text_from_pdf(file):
     pdf = PdfFileReader(file)
